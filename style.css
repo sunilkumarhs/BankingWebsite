@@ -672,3 +672,15 @@ h4 {
   font-size: 1.5rem;
   font-weight: 400;
 }
+
+.btn--close-modal {
+  font-family: inherit;
+  color: inherit;
+  position: absolute;
+  top: 0.5rem;
+  right: 2rem;
+  font-size: 4rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
