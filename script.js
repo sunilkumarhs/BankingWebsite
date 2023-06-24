@@ -30,6 +30,40 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+//button scroll
+const scrollTo = document
+  .querySelector('.btn--scroll-to')
+  .addEventListener('click', function () {
+    const section1 = document.querySelector('.section');
+    const s1coords = section1.getBoundingClientRect();
+    // console.log(s1coords);
+    // window.scrollTo({
+    //   left: s1coords.left + window.pageXOffset,
+    //   top: s1coords.top + window.pageYOffset,
+    //   behavior: 'smooth',
+    // });
+    section1.scrollIntoView({ behavior: 'smooth' });
+  });
+////////////////////////////////////////////////////////////////
+//Page Navigation
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     console.log('clcik');
+//     e.preventDefault();
+//     const id = this.getAttribute('href');
+//     console.log(id);
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//   });
+// });
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+});
+///////////////////////////////////////////////////////////////
 // console.log(document.documentElement);
 // console.log(document.head);
 // console.log(document.body);
@@ -92,57 +126,74 @@ document.addEventListener('keydown', function (e) {
 // logo.classList.toggle('c');
 // logo.classList.contains('c');
 
-const scrollTo = document
-  .querySelector('.btn--scroll-to')
-  .addEventListener('click', function () {
-    const section1 = document.querySelector('.section');
-    const s1coords = section1.getBoundingClientRect();
-    // console.log(s1coords);
-    // window.scrollTo({
-    //   left: s1coords.left + window.pageXOffset,
-    //   top: s1coords.top + window.pageYOffset,
-    //   behavior: 'smooth',
-    // });
-    section1.scrollIntoView({ behavior: 'smooth' });
-  });
 //onmouse events
+// const h1 = document.querySelector('h1');
+// const head1 = function () {
+//   alert('You have entered to heading section');
+// };
+
+// h1.addEventListener('mouseenter', head1);
+
+// h1.onmouseenter = function () {
+//   alert('onmouseEnter funtion');
+// };
+
+// setTimeout(() => h1.removeEventListener('mouseenter', head1), 3000);
+
+// //capturing and bubbling
+// const randomInt = (min, max) =>
+//   Math.floor(Math.random() * (max - min + 1) + min);
+
+// const randomColor = () =>
+//   `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+
+// document.querySelector('.nav__link').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log('Link', this, e.target, e.currentTarget);
+
+//   // e.stopPropagation();
+// });
+
+// document.querySelector('.nav__links').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log('Container', this, e.target, e.currentTarget);
+// });
+
+// document.querySelector('.nav').addEventListener(
+//   'click',
+//   function (e) {
+//     this.style.backgroundColor = randomColor();
+//     console.log('Nav', this, e.target, e.currentTarget);
+//   },
+//   true
+// );
+
+//DOM trversing
 const h1 = document.querySelector('h1');
-const head1 = function () {
-  alert('You have entered to heading section');
-};
 
-h1.addEventListener('mouseenter', head1);
+// Going downwards: child
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes);
+console.log(h1.children);
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'orangered';
 
-h1.onmouseenter = function () {
-  alert('onmouseEnter funtion');
-};
+// Going upwards: parents
+console.log(h1.parentNode);
+console.log(h1.parentElement);
 
-setTimeout(() => h1.removeEventListener('mouseenter', head1), 3000);
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
 
-//capturing and bubbling
-const randomInt = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1) + min);
+h1.closest('h1').style.background = 'var(--gradient-primary)';
 
-const randomColor = () =>
-  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+// Going sideways: siblings
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
 
-document.querySelector('.nav__link').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('Link', this, e.target, e.currentTarget);
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
 
-  // e.stopPropagation();
+console.log(h1.parentElement.children);
+[...h1.parentElement.children].forEach(function (el) {
+  if (el !== h1) el.style.transform = 'scale(0.5)';
 });
-
-document.querySelector('.nav__links').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('Container', this, e.target, e.currentTarget);
-});
-
-document.querySelector('.nav').addEventListener(
-  'click',
-  function (e) {
-    this.style.backgroundColor = randomColor();
-    console.log('Nav', this, e.target, e.currentTarget);
-  },
-  true
-);
