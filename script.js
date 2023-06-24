@@ -97,7 +97,7 @@ const scrollTo = document
   .addEventListener('click', function () {
     const section1 = document.querySelector('.section');
     const s1coords = section1.getBoundingClientRect();
-    console.log(s1coords);
+    // console.log(s1coords);
     // window.scrollTo({
     //   left: s1coords.left + window.pageXOffset,
     //   top: s1coords.top + window.pageYOffset,
@@ -105,3 +105,44 @@ const scrollTo = document
     // });
     section1.scrollIntoView({ behavior: 'smooth' });
   });
+//onmouse events
+const h1 = document.querySelector('h1');
+const head1 = function () {
+  alert('You have entered to heading section');
+};
+
+h1.addEventListener('mouseenter', head1);
+
+h1.onmouseenter = function () {
+  alert('onmouseEnter funtion');
+};
+
+setTimeout(() => h1.removeEventListener('mouseenter', head1), 3000);
+
+//capturing and bubbling
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('Link', this, e.target, e.currentTarget);
+
+  // e.stopPropagation();
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('Container', this, e.target, e.currentTarget);
+});
+
+document.querySelector('.nav').addEventListener(
+  'click',
+  function (e) {
+    this.style.backgroundColor = randomColor();
+    console.log('Nav', this, e.target, e.currentTarget);
+  },
+  true
+);
