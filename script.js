@@ -8,6 +8,10 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const nav = document.querySelector('.nav');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+const section1 = document.querySelector('.section');
 
 const openModal = function (e) {
   e.preventDefault();
@@ -35,7 +39,6 @@ document.addEventListener('keydown', function (e) {
 const scrollTo = document
   .querySelector('.btn--scroll-to')
   .addEventListener('click', function () {
-    const section1 = document.querySelector('.section');
     const s1coords = section1.getBoundingClientRect();
     // console.log(s1coords);
     // window.scrollTo({
@@ -66,9 +69,6 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 });
 
 //tabbed component
-const tabs = document.querySelectorAll('.operations__tab');
-const tabContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations__content');
 
 tabContainer.addEventListener('click', function (e) {
   const click = e.target.closest('.operations__tab');
@@ -236,3 +236,13 @@ nav.addEventListener('mouseout', fadeHandler.bind(1));
 // [...h1.parentElement.children].forEach(function (el) {
 //   if (el !== h1) el.style.transform = 'scale(0.5)';
 // });
+
+//sticy navigstion
+const initialCoords = section1.getBoundingClientRect();
+
+window.addEventListener('scroll', function () {
+  console.log(window.scrollY);
+
+  if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+});
